@@ -13,6 +13,7 @@ function fetchCountry(country_string) {
 
         })
 }
+
 function fetchAllCountries() {
     fetch('https://api.covid19api.com/countries')
         .then(res => res.json())
@@ -21,8 +22,9 @@ function fetchAllCountries() {
             let list = document.getElementById('country-data-list');
             for (i in result) {
                 let option = document.createElement('option');
-                option.value = result[i].Slug;
+                option.value = result[i].Country;
                 list.appendChild(option);
+                //appending keypair value to make the search box
 
             }
             console.log(list)
@@ -87,7 +89,10 @@ function getRegions(result) {  //purpose of this function is to get the latest o
 
 function chooseCountry() {
     countryName = document.countriesForm.countryName.value;
-    console.log(countryName)
+    
+    console.log("inside choose country()")
+
+
     clearcontent('card-list')
     fetchCountry(countryName);
 }

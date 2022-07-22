@@ -10,3 +10,16 @@ form {
     text-align: center;
     margin: 30px 150px
 }
+
+.card:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    border-width: thick;
+    border-color: #212529;
+    transform: scale(1.1);
+}
+
+@media only screen and (max-width: 600px) {
+    form {
+        margin: 15px 50px
+    }
+}
