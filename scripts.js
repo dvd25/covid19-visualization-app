@@ -7,7 +7,9 @@ function fetchCountry(country_string) {
         .then(result => {
             //console.log(result)
             //let text1 = document.createTextNode();
-            getRegions(result)
+            if (result.length > 0){
+                getRegions(result)
+            } else {alert(`No available data for ${country_string}.`)}
 
         })
 }
@@ -31,9 +33,16 @@ function addCard(card) {
 
     for (let i in card) {
         //console.log(card[i])
-        const province = card[i].Province
-        const deaths = card[i].Deaths
-        const confirmed = card[i].Confirmed
+        let province = "";
+        console.log(card)
+        if (card[i].Province == ""){
+            province = card[i].Country
+        } else {
+            province = card[i].Province
+        }
+            
+        const deaths = (card[i].Deaths).toLocaleString()
+        const confirmed = (card[i].Confirmed).toLocaleString()
         //console.log(province, deaths, confirmed)
         const template = document.getElementById("card-template").content.cloneNode(true);
         template.querySelector('.card-title').innerText = province;
@@ -49,12 +58,30 @@ function getRegions(result) {  //purpose of this function is to get the latest o
         } else { break; }
 
     }
-    //console.log(uniqueProvinceArray)
+    console.log("length: " + uniqueProvinceArray.length)
+    console.log(result)
+    console.log(uniqueProvinceArray)
+    let uniqueItems = uniqueProvinceArray.length
     const latestUniqueRegionArray = [];
-    for (let j = 1; j < uniqueProvinceArray.length; j++) {
-        latestUniqueRegionArray.push(result[result.length - j])
+    // for (let j = 1; j < uniqueProvinceArray.length; j++) {
+    //     latestUniqueRegionArray.push(result[result.length - j])
+    // }
+    // [nz, cookisland]
+    // result.length = 404,  404 -2 - 1 = 401,
+    for (let j = result.length - 1; j > result.length - uniqueItems - 1; j--) {
+        latestUniqueRegionArray.push(result[j])
     }
-    //console.log(latestUniqueRegionArray)
+//     let uniqueMarker = results.lastItem
+// let i = results.length
+// while True:
+//    if results[i] = uniqueMarker:
+//        break
+
+//    targetArray.push(results[i])
+//    i--
+
+
+    console.log(latestUniqueRegionArray)
     addCard(latestUniqueRegionArray)
 }
 
