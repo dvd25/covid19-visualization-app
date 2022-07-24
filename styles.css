@@ -17,6 +17,20 @@ form {
     border-color: #212529;
     transform: scale(1.1);
 }
+.container3 { 
+    position: relative;
+    height:400px;
+    width: auto;
+  }
+  
+  .center3 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 
 @media only screen and (max-width: 600px) {
     form {

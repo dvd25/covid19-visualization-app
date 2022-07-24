@@ -7,9 +7,9 @@ function fetchCountry(country_string) {
         .then(result => {
             //console.log(result)
             //let text1 = document.createTextNode();
-            if (result.length > 0){
+            if (result.length > 0) {
                 getRegions(result)
-            } else {alert(`No available data for ${country_string}.`)}
+            } else { alert(`No available data for ${country_string}.`) }
 
         })
 }
@@ -37,20 +37,25 @@ function addCard(card) {
         //console.log(card[i])
         let province = "";
         console.log(card)
-        if (card[i].Province == ""){
+        if (card[i].Province == "") {
             province = card[i].Country
         } else {
             province = card[i].Province
         }
-            
+
+       
+        document.getElementById("h1h1").innerText = card[i].Country;
         const deaths = (card[i].Deaths).toLocaleString()
         const confirmed = (card[i].Confirmed).toLocaleString()
+        optionObj.series[0].data.push(card[i].Deaths);
+        optionObj.xAxis.data.push(province);
         //console.log(province, deaths, confirmed)
         const template = document.getElementById("card-template").content.cloneNode(true);
         template.querySelector('.card-title').innerText = province;
         template.querySelector('.card-text').innerText = "Total Cases: " + confirmed + "\n Total Deaths: " + deaths;
         document.querySelector('#card-list').appendChild(template);
     }
+    createGraph();
 }
 function getRegions(result) {  //purpose of this function is to get the latest object of each region.
     const uniqueProvinceArray = [];
@@ -73,14 +78,14 @@ function getRegions(result) {  //purpose of this function is to get the latest o
     for (let j = result.length - 1; j > result.length - uniqueItems - 1; j--) {
         latestUniqueRegionArray.push(result[j])
     }
-//     let uniqueMarker = results.lastItem
-// let i = results.length
-// while True:
-//    if results[i] = uniqueMarker:
-//        break
+    //     let uniqueMarker = results.lastItem
+    // let i = results.length
+    // while True:
+    //    if results[i] = uniqueMarker:
+    //        break
 
-//    targetArray.push(results[i])
-//    i--
+    //    targetArray.push(results[i])
+    //    i--
 
 
     console.log(latestUniqueRegionArray)
@@ -89,7 +94,7 @@ function getRegions(result) {  //purpose of this function is to get the latest o
 
 function chooseCountry() {
     countryName = document.countriesForm.countryName.value;
-    
+
     console.log("inside choose country()")
 
 
@@ -101,7 +106,43 @@ function clearcontent(elementID) {
     document.getElementById(elementID).innerHTML = "";
 }
 
+
+let optionObj = {
+    title: {
+        text: 'ECharts Getting Started Example'
+    },
+    tooltip: {},
+    legend: {
+        data: ['sales']
+    },
+    xAxis: {
+        data: []
+    },
+    yAxis: {},
+    series: [
+        {
+            name: 'deaths',
+            type: 'bar',
+            data: []
+        }
+    ]
+};
+
+function createGraph() {
+    
+    let chartDom = document.getElementById('main1');
+    myChart = echarts.init(chartDom);
+    // Specify the configuration items and data for the chart
+
+    myChart.setOption(optionObj);
+}
+
+
+
+
 //window.onload = fetchCountry('Australia');
 window.onload = fetchAllCountries();
+//window.onload = createGraph();
+
 
 
