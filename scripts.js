@@ -113,14 +113,18 @@ let optionObj = {
             '#2f4554'
         ],
     title: {
-        text: 'Total COVID19 Deaths'
+        text: 'TOTAL COVID19 Deaths'
     },
     tooltip: {},
     legend: {
         data: ['provinces']
     },
     xAxis: {
-        data: []
+        data: [],
+        axisLabel: {
+            interval: 0,
+            rotate: 30 //If the label names are too long you can manage this by rotating the label.
+        }
     },
     yAxis: {},
     series: [
