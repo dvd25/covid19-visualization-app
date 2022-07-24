@@ -108,12 +108,16 @@ function clearcontent(elementID) {
 
 
 let optionObj = {
+    color: [
+            '#5bc0de',
+            '#2f4554'
+        ],
     title: {
-        text: 'ECharts Getting Started Example'
+        text: 'Total COVID19 Deaths'
     },
     tooltip: {},
     legend: {
-        data: ['sales']
+        data: ['provinces']
     },
     xAxis: {
         data: []

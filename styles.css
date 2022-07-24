@@ -14,7 +14,8 @@ form {
 .card:hover {
     box-shadow: 5px 6px 6px 2px #e9ecef;
     border-width: thick;
-    border-color: #212529;
+    /* border-color: #212529; */
+    border-color: #0275d8;
     transform: scale(1.1);
 }
 .container3 { 
