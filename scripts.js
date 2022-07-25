@@ -33,6 +33,12 @@ function fetchAllCountries() {
 
 function addCard(card) {
 
+    optionObj.series[0].data = [];
+    optionObj.xAxis.data = [];
+    optionObj2.series[0].data = [];
+    optionObj2.series[1].data = [];
+    optionObj2.xAxis.data = [];
+
     for (let i in card) {
         //console.log(card[i])
         let province = "";
@@ -43,19 +49,27 @@ function addCard(card) {
             province = card[i].Province
         }
 
-       
+
         document.getElementById("h1h1").innerText = card[i].Country;
         const deaths = (card[i].Deaths).toLocaleString()
         const confirmed = (card[i].Confirmed).toLocaleString()
         optionObj.series[0].data.push(card[i].Deaths);
         optionObj.xAxis.data.push(province);
+
+
+        optionObj2.series[0].data.push(card[i].Confirmed);
+        optionObj2.series[1].data.push(card[i].Deaths);
+        optionObj2.xAxis.data.push(province);
+
+
         //console.log(province, deaths, confirmed)
         const template = document.getElementById("card-template").content.cloneNode(true);
         template.querySelector('.card-title').innerText = province;
         template.querySelector('.card-text').innerText = "Total Cases: " + confirmed + "\n Total Deaths: " + deaths;
         document.querySelector('#card-list').appendChild(template);
     }
-    createGraph();
+    createDeathGraph();
+    createCaseGraph();
 }
 function getRegions(result) {  //purpose of this function is to get the latest object of each region.
     const uniqueProvinceArray = [];
@@ -109,11 +123,11 @@ function clearcontent(elementID) {
 
 let optionObj = {
     color: [
-            '#5bc0de',
-            '#2f4554'
-        ],
+        '#5bc0de',
+        '#f0ad4e'
+    ],
     title: {
-        text: 'TOTAL COVID19 Deaths'
+        text: 'COVID19 DEATHS BY REGION'
     },
     tooltip: {},
     legend: {
@@ -133,16 +147,61 @@ let optionObj = {
             type: 'bar',
             data: []
         }
+
     ]
 };
 
-function createGraph() {
-    
+let optionObj2 = {
+    color: [
+        "#f0ad4e",
+        "#d9534f"
+    ],
+    title: {
+        text: 'COVID19 TOTAL CASES BY REGION'
+    },
+    tooltip: {},
+    legend: {
+        data: ['total cases', 'deaths']
+    },
+    xAxis: {
+        data: ["a","b","c","d"],
+        axisLabel: {
+            interval: 0,
+            rotate: 30 //If the label names are too long you can manage this by rotating the label.
+        }
+    },
+    yAxis: {},
+    series: [
+        {
+            name: 'total cases',
+            type: 'bar',
+            data: [1,2,3,4]
+        },
+        {
+            name: 'deaths',
+            type: 'bar',
+            data: []
+        }
+    ]
+};
+
+//function that creates the graph, its uses the obj created globally.
+function createDeathGraph() {
     let chartDom = document.getElementById('main1');
-    myChart = echarts.init(chartDom);
+    let myChart = echarts.init(chartDom);
     // Specify the configuration items and data for the chart
 
     myChart.setOption(optionObj);
+}
+
+function createCaseGraph() {
+
+
+    let chartDom2 = document.getElementById('main2');
+    let myChart2 = echarts.init(chartDom2);
+    // Specify the configuration items and data for the chart
+
+    myChart2.setOption(optionObj2);
 }
 
 
@@ -150,6 +209,9 @@ function createGraph() {
 
 //window.onload = fetchCountry('Australia');
 window.onload = fetchAllCountries();
+window.onload = (function() {
+    window.scrollTo(0,0)
+  })();
 //window.onload = createGraph();
 
 
