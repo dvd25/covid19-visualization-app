@@ -14,13 +14,108 @@ form {
 .card:hover {
     box-shadow: 5px 6px 6px 2px #e9ecef;
     border-width: thick;
-    border-color: #212529;
+    /* border-color: #212529; */
+    border-color: #6c757d;
     transform: scale(1.1);
 }
+
+.container3 {
+    position: relative;
+    height: auto;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.small-container {
+    position: relative;
+    height: 200px;
+    width: auto;
+}
+
+.btn-container {
+
+    text-align: center;
+}
+
+.table1{
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    border-collapse: collapse;
+
+}
+tr {
+    background-color: #52c96e;
+}
+tr:nth-child(even){background-color: #ffffff;}
+
+th {
+    background-color: #28a745;
+    font-size: large;
+}
+
+.center3 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.tableContainer {
+    height:auto;
+    width: 100%;
+    
+}
+
+.animation1 {
+    width: 80px;
+    height: 80px;
+    background: red;
+    position: relative;
+    animation: mymove 5s infinite;
+    margin-left: auto;
+    margin-right: auto;
+    }
+@keyframes mymove {
+    0% {
+        top: 0px;
+        left: -50px;
+        background: #0275d8;
+    }
+
+    25% {
+        top: 0px;
+        left: 50px;
+        background: #5bc0de;
+    }
+
+    50% {
+        top: 100px;
+        left: 50px;
+        background: rgb(135, 202, 27);
+    }
+
+    75% {
+        top: 100px;
+        left: -50px;
+        background: #5cb85c;
+    }
+
+    100% {
+        top: 0px;
+        left: -50px;
+        background: rgb(21, 230, 125);
+    }}
 
 @media only screen and (max-width: 600px) {
     form {
         margin: 15px 50px
     }
-    .container{margin-left: auto; margin-right: auto;}
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
