@@ -15,19 +15,43 @@ form {
     box-shadow: 5px 6px 6px 2px #e9ecef;
     border-width: thick;
     /* border-color: #212529; */
-    border-color: #0275d8;
+    border-color: #6c757d;
     transform: scale(1.1);
 }
 
 .container3 {
     position: relative;
-    height: 400px;
-    width: auto;
+    height: auto;
+    max-width: 95%;
+    margin: 0 auto;
 }
+
 .small-container {
     position: relative;
     height: 200px;
     width: auto;
+}
+
+.btn-container {
+
+    text-align: center;
+}
+
+.table1{
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    border-collapse: collapse;
+
+}
+tr {
+    background-color: #52c96e;
+}
+tr:nth-child(even){background-color: #ffffff;}
+
+th {
+    background-color: #28a745;
+    font-size: large;
 }
 
 .center3 {
@@ -39,9 +63,15 @@ form {
     transform: translate(-50%, -50%);
 }
 
+.tableContainer {
+    height:auto;
+    width: 100%;
+    
+}
+
 .animation1 {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background: red;
     position: relative;
     animation: mymove 5s infinite;
