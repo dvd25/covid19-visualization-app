@@ -32,42 +32,41 @@ function fetchAllCountries() {
 }
 
 function addCard(card) {
-
+    //showAnimation();
     optionObj.series[0].data = [];
     optionObj.xAxis.data = [];
     optionObj2.series[0].data = [];
     optionObj2.series[1].data = [];
     optionObj2.xAxis.data = [];
-
     for (let i in card) {
-        //console.log(card[i])
-        let province = "";
-        console.log(card)
-        if (card[i].Province == "") {
-            province = card[i].Country
-        } else {
-            province = card[i].Province
+            //console.log(card[i])
+            let province = "";
+            console.log(card)
+            if (card[i].Province == "") {
+                province = card[i].Country
+            } else {
+                province = card[i].Province
+            }
+
+
+            document.getElementById("h1h1").innerText = card[i].Country;
+            const deaths = (card[i].Deaths).toLocaleString()
+            const confirmed = (card[i].Confirmed).toLocaleString()
+            optionObj.series[0].data.push(card[i].Deaths);
+            optionObj.xAxis.data.push(province);
+
+
+            optionObj2.series[0].data.push(card[i].Confirmed);
+            optionObj2.series[1].data.push(card[i].Deaths);
+            optionObj2.xAxis.data.push(province);
+
+
+            //console.log(province, deaths, confirmed)
+            const template = document.getElementById("card-template").content.cloneNode(true);
+            template.querySelector('.card-title').innerText = province;
+            template.querySelector('.card-text').innerText = "Total Cases: " + confirmed + "\n Total Deaths: " + deaths;
+            document.querySelector('#card-list').appendChild(template);
         }
-
-
-        document.getElementById("h1h1").innerText = card[i].Country;
-        const deaths = (card[i].Deaths).toLocaleString()
-        const confirmed = (card[i].Confirmed).toLocaleString()
-        optionObj.series[0].data.push(card[i].Deaths);
-        optionObj.xAxis.data.push(province);
-
-
-        optionObj2.series[0].data.push(card[i].Confirmed);
-        optionObj2.series[1].data.push(card[i].Deaths);
-        optionObj2.xAxis.data.push(province);
-
-
-        //console.log(province, deaths, confirmed)
-        const template = document.getElementById("card-template").content.cloneNode(true);
-        template.querySelector('.card-title').innerText = province;
-        template.querySelector('.card-text').innerText = "Total Cases: " + confirmed + "\n Total Deaths: " + deaths;
-        document.querySelector('#card-list').appendChild(template);
-    }
     createDeathGraph();
     createCaseGraph();
 }
@@ -204,7 +203,17 @@ function createCaseGraph() {
     myChart2.setOption(optionObj2);
 }
 
+//for hiding animation
 
+function showAnimation(){
+    document.getElementById("animationDiv").style.display="block";
+    setInterval(function(){document.getElementById("animationDiv").style.display="none";
+    document.getElementById("animationContainer").style.display="none";},4000)
+}
+
+function scrollToStart(){
+    document.body.scrollTop = 0;
+}
 
 
 //window.onload = fetchCountry('Australia');
@@ -212,7 +221,6 @@ window.onload = fetchAllCountries();
 window.onload = (function() {
     window.scrollTo(0,0)
   })();
-//window.onload = createGraph();
-
+window.onload = scrollToStart();
 
 

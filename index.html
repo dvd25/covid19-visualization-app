@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <script src="echarts.js"></script>
-    
+
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,12 +33,13 @@
     <br><br><br>
 
     <main>
-        <h1 class="display-1"> COVID19 DATA BY COUNTRY</h1>
+        <h1 id='firstHeader'class="display-1"> COVID19 DATA BY COUNTRY</h1>
 
         <datalist id="country-data-list">
             <!-- Datalist that contains all the data from API-->
         </datalist>
         <!--fetches all the countries then appends them to this data list-->
+
 
         <form name="countriesForm">
             <div class="row">
@@ -51,40 +52,43 @@
                     <input type="text" name="countryName" list="country-data-list" class="form-control"
                         placeholder="Choose country to visualise.">
                     <br>
-                    <input type="submit" id="submitBtn" onclick="chooseCountry()" class="btn btn-primary"></button>
+                    <input type="submit" id="submitBtn" onclick="setInterval(chooseCountry(),2000);showAnimation();" class="btn btn-primary"></button>
                 </div>
             </div>
         </form>
+        <!-- <div class="loading">Loading&#8230;</div> -->
 
-        <h1 id="h1h1" class="display-1"></h1>
+        <div id="animationContainer" class="small-container">
+            <div id = "animationDiv" class="animation1" style="display:none"> </div>
+        </div>
+        <div id="scroll to here" class="display-1"></div>
+            <h1 id="h1h1" class="display-1"></h1>
+ 
         <div class="container3">
-            <div class = "row col-lg-12 col-md-12 col-sm-12">
-                <div id="main1" class ="center3" style="height:400px; width: 800px;">
+            <div class="row col-lg-12 col-md-12 col-sm-12">
+                <div id="main1" class="center3" style="height:400px; width: 800px;">
                 </div>
 
-            
+
             </div>
 
 
         </div>
 
         <div class="container3">
-                <div id="main2" class ="center3" style="height:400px; width: 800px;">
-                </div>
-            
-            </div>
+            <div id="main2" class="center3" style="height:400px; width: 800px;">
+        </div>
+
+        </div>
 
         </div>
 
 
-        
+
         <div class="container bg-white rounded ">
             <div id='card-list' class="row justify-content-center">
             </div>
         </div>
-
-
-        
 
 
     </main>
@@ -93,7 +97,7 @@
 
 <script>
     document.getElementById("submitBtn").addEventListener("click", function (event) {
-        event.preventDefault()
+        event.preventDefault();
     });
 </script>
 
